@@ -1,139 +1,101 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Batalha contra Sans</title>
+  <title>The Worst UI with Hover</title>
   <style>
     body {
-      background-color: black;
-      color: white;
-      font-family: 'Courier New', Courier, monospace;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 20px;
+      background-color: #ff00ff; /* Screaming magenta */
+      color: lime;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
       text-align: center;
+      margin: 0;
+      padding: 0;
     }
 
     h1 {
+      font-size: 5em;
+      background: yellow;
+      color: red;
+      text-shadow: 2px 2px black;
+      margin: 0;
+    }
+
+    .blinking {
+      animation: blink 0.6s infinite alternate;
+    }
+
+    @keyframes blink {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 50px;
+    }
+
+    .buttons button {
+      background-color: cyan;
+      color: darkblue;
+      font-size: 1.5em;
+      border: 5px dashed red;
+      margin: 20px;
+      padding: 30px;
+      transform: rotate(-5deg);
+      transition: all 0.3s ease;
+    }
+
+    /* Hover animation in the middle of chaos */
+    .buttons button:hover {
+      background-color: hotpink;
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 0 20px yellow;
+    }
+
+    marquee {
+      background: black;
+      color: white;
+      font-size: 1.5em;
+      padding: 10px;
+      margin-top: 20px;
+    }
+
+    input {
       font-size: 2em;
-      margin-bottom: 20px;
-    }
-
-    .hp-bar {
-      margin: 10px;
-    }
-
-    .bar {
-      background-color: red;
-      height: 20px;
-      width: 200px;
-    }
-
-    .bar-inner {
+      padding: 20px;
+      margin: 30px;
+      border: 10px double orange;
       background-color: lime;
-      height: 100%;
-      width: 100%;
     }
 
-    button {
-      background-color: white;
-      color: black;
-      font-family: inherit;
-      padding: 10px 20px;
-      margin-top: 20px;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-      transition: transform 0.2s;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-    }
-
-    #log {
-      margin-top: 20px;
-      white-space: pre-wrap;
-      max-width: 500px;
+    footer {
+      font-size: 1.2em;
+      background: red;
+      color: white;
+      padding: 20px;
+      margin-top: 50px;
     }
   </style>
 </head>
 <body>
-  <h1>Batalha contra Sans</h1>
+  <h1 class="blinking">WELCOME TO THE WORST UI</h1>
 
-  <div class="hp-bar">
-    <div>Você: <span id="player-hp-text">100</span> HP</div>
-    <div class="bar"><div class="bar-inner" id="player-hp-bar"></div></div>
+  <marquee>🚨 WARNING: THIS IS BAD DESIGN 🚨</marquee>
+
+  <input type="text" placeholder="Type something (but you shouldn't)" />
+
+  <div class="buttons">
+    <button onclick="alert('You clicked the chaos!')">CLICK HERE</button>
+    <button onclick="alert('More chaos!')">AND HERE!</button>
+    <button onclick="alert('OH MY GOD!')">EVEN MORE</button>
+    <button onclick="alert('Congratulations, you reached the end.')">THE END?</button>
   </div>
 
-  <div class="hp-bar">
-    <div>Sans: <span id="sans-hp-text">100</span> HP</div>
-    <div class="bar"><div class="bar-inner" id="sans-hp-bar"></div></div>
-  </div>
-
-  <button id="attack-button">Atacar</button>
-
-  <div id="log"></div>
-
-  <script>
-    let playerHP = 100;
-    let sansHP = 100;
-
-    const playerHPText = document.getElementById("player-hp-text");
-    const sansHPText = document.getElementById("sans-hp-text");
-    const playerHPBar = document.getElementById("player-hp-bar");
-    const sansHPBar = document.getElementById("sans-hp-bar");
-    const logDiv = document.getElementById("log");
-    const attackButton = document.getElementById("attack-button");
-
-    function updateHP() {
-      playerHPText.textContent = playerHP;
-      sansHPText.textContent = sansHP;
-      playerHPBar.style.width = playerHP + "%";
-      sansHPBar.style.width = sansHP + "%";
-    }
-
-    function log(text) {
-      logDiv.textContent = text + "\n" + logDiv.textContent;
-    }
-
-    function playerAttack() {
-      if (playerHP <= 0 || sansHP <= 0) return;
-
-      const damage = Math.floor(Math.random() * 20) + 5;
-      sansHP = Math.max(0, sansHP - damage);
-      log(`Você atacou Sans e causou ${damage} de dano!`);
-      updateHP();
-
-      if (sansHP <= 0) {
-        log("Você derrotou Sans!");
-        attackButton.disabled = true;
-        return;
-      }
-
-      setTimeout(sansAttack, 1000);
-    }
-
-    function sansAttack() {
-      const damage = Math.floor(Math.random() * 25);
-      playerHP = Math.max(0, playerHP - damage);
-      log(`Sans contra-atacou e causou ${damage} de dano!`);
-      updateHP();
-
-      if (playerHP <= 0) {
-        log("Você perdeu! Sans te derrotou.");
-        attackButton.disabled = true;
-      }
-    }
-
-    attackButton.addEventListener("click", playerAttack);
-
-    updateHP();
-  </script>
+  <footer>
+    Made with hatred for design – but love for chaos.
+  </footer>
 </body>
 </html>
